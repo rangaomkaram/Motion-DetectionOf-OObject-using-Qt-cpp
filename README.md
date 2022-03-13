@@ -8,6 +8,7 @@ we load a video, try to identify in the video the movement of a ball and mark th
 - create a new project   motiondetect   in folder opencvpro
 - in the .pro file add the location of the include files and of the dllsbelow
 
+```
 FORMS += \
         mainwindow.ui:
 
@@ -21,10 +22,11 @@ LIBS += U:\opencv340\bin\libopencv_videoio340.dll
 LIBS += U:\opencv340\bin\libopencv_video340.dll
 LIBS += U:\opencv340\bin\libopencv_features2d340.dll
 LIBS += U:\opencv340\bin\libopencv_calib3d340.dll
+```
  ----------------------------------------------------------------
 - under sources open the file mainwindow.cpp
 - - over line add:
-
+```
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
@@ -34,6 +36,8 @@ LIBS += U:\opencv340\bin\libopencv_calib3d340.dll
 #include "opencv2/videoio.hpp"
 #include <opencv2/highgui.hpp>
 #include <opencv2/video.hpp>
+```
+```
 //C++
 #include <iostream>
 #include <sstream>
@@ -48,8 +52,9 @@ const static int BLUR_SIZE = 10;
 int theObject[2] = {0,0};
 //bounding rectangle of the object, we will use the center of this as its position.
 Rect objectBoundingRectangle = Rect(0,0,0,0);
+```
  ----------------------------
-
+```
 - under     addthe function  processVideo();
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
@@ -78,8 +83,9 @@ private:
 };
 #endif // MAINWINDOW_H
  ----------------------------------------------------
+ ```
 - at the end of mainwindow.cpp add our function code for processVideo():
-
+```
 void MainWindow::processVideo(){
     //some boolean variables for added functionality
     //these two can be toggled by pressing 'd' or 't'
@@ -179,10 +185,10 @@ void MainWindow::processVideo(){
     }
     return;
 }
-
+```
  --------------------------------------------
 - add below that a small helper function that converts a number into a string:
-
+```
 //int to string helper function
 string MainWindow::intToString(int number){
     //this function has a number input and string output
@@ -190,9 +196,10 @@ string MainWindow::intToString(int number){
     ss << number;
     return ss.str();
 }
+```
  --------------------------------------------
 -add below a function that is looking for movement by subtracting the intensities per pixel of two subsequent images  + blurring + thresholding:
-
+```
 void MainWindow::searchForMovement(Mat thresholdImage, Mat &cameraFeed){
     //notice how we use the '&' operator for the cameraFeed. This is because we wish
     //to take the values passed into the function and manipulate them, rather than just working with a copy.
@@ -232,9 +239,13 @@ void MainWindow::searchForMovement(Mat thresholdImage, Mat &cameraFeed){
     line(cameraFeed,Point(x,y),Point(x,y+25),Scalar(0,255,0),2);
     line(cameraFeed,Point(x,y),Point(x-25,y),Scalar(0,255,0),2);
     line(cameraFeed,Point(x,y),Point(x+25,y),Scalar(0,255,0),2);
- putText(cameraFeed,"Tracking object at (" + intToString(x)    	                     +","+intToString(y)+")",Point(0,0),1,1,Scalar(255,0,0),2);
+ putText(cameraFeed,"Tracking object at (" + intToString(x)+","+intToString(y)+")",Point(0,0),1,1,Scalar(255,0,0),2);
 }
+```
 ## Copy all dlls(dynamic linked libraries in the folder bulid)
-                                                                                                                                            
-- under Headers mainwindow.h 
+## save all
+## hammer (build)
+excute the .exe file
+## four windows appear as shown below
+
 ![image](https://user-images.githubusercontent.com/46269446/158052719-12bd1601-fb93-4e62-b2b8-776c686cae05.png)
