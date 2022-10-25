@@ -4,7 +4,7 @@
 
 Here 
 we load a video, try to identify in the video the movement of a ball and mark the ball with cross and add its coordinates
-- start QT IDE: Computer->O:\Software\Programmierung\QT\Tools\QtCreator\bin->qtcreator.exe
+- start QT IDE: 
 - create a new project   motiondetect   in folder opencvpro
 - in the .pro file add the location of the include files and of the dlls below
 - By using below steps and source code , you can make this project using Qt Creator IDE.
